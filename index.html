@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明月萌 - 專屬小型犬的溫馨SPA美容工作室</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans TC & Fredoka -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F4F8FB',      // 柔和淺藍白底色
+                        milktea: {
+                            50: '#F0F7FD',
+                            100: '#E1EFF9',    // 超淺天藍
+                            200: '#C2E0F5',    // 淺藍天空色
+                            300: '#94C7EC',    // 舒服天空藍
+                            400: '#5BA7DE',    // 主色清爽藍
+                            500: '#3B89C3',    // 深質感藍
+                            600: '#2A6B9B',    // 濃郁靛藍
+                        },
+                        warmgrey: '#5A6872',   // 藍灰質感內文色
+                        softpink: '#E1F0FA',   // 柔藍綴色
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        rounded: ['"Fredoka"', '"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F4F8FB;
+            color: #43515C;
+            font-family: 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-pattern {
+            background-color: #F4F8FB;
+            background-image: radial-gradient(#C2E0F5 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        /* 自訂圓角與微光陰影 */
+        .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(59, 137, 195, 0.08);
+        }
+        .card-shadow-hover:hover {
+            box-shadow: 0 15px 35px -5px rgba(59, 137, 195, 0.15);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 導覽列 Navigation -->
+    <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-milktea-200/60 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-full bg-milktea-300 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-rounded fa-paw"></i>
+                    </div>
+                    <div>
+                        <span class="font-rounded text-2xl font-bold tracking-wider text-milktea-600 block leading-tight">明月萌</span>
+                        <span class="text-xs text-milktea-500 font-light tracking-widest block">PET STUDIO</span>
+                    </div>
+                </a>
+
+                <!-- 選單 (Desktop) -->
+                <div class="hidden md:flex items-center space-x-8 text-base font-medium text-milktea-600">
+                    <a href="#about" class="hover:text-milktea-400 transition-colors">關於明月萌</a>
+                    <a href="#services" class="hover:text-milktea-400 transition-colors">寶貝洗護與SPA</a>
+                    <a href="#why-us" class="hover:text-milktea-400 transition-colors">上班族貼心對策</a>
+                    <a href="#reviews" class="hover:text-milktea-400 transition-colors">萌萌日常與評價</a>
+                    <a href="#booking" class="bg-milktea-500 text-white px-5 py-2.5 rounded-full hover:bg-milktea-600 transition-all shadow-sm hover:shadow-md">即刻預約</a>
+                </div>
+
+                <!-- 手機版選單按鈕 -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-milktea-600 hover:text-milktea-500 focus:outline-none p-2" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream border-b border-milktea-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-xl text-milktea-600 font-medium hover:bg-milktea-100">關於明月萌</a>
+            <a href="#services" class="mobile-link block px-3 py-2 rounded-xl text-milktea-600 font-medium hover:bg-milktea-100">寶貝洗護與SPA</a>
+            <a href="#why-us" class="mobile-link block px-3 py-2 rounded-xl text-milktea-600 font-medium hover:bg-milktea-100">上班族貼心對策</a>
+            <a href="#reviews" class="mobile-link block px-3 py-2 rounded-xl text-milktea-600 font-medium hover:bg-milktea-100">萌萌日常與評價</a>
+            <a href="#booking" class="mobile-link block w-full text-center bg-milktea-500 text-white px-4 py-2.5 rounded-full font-medium shadow-sm">即刻預約</a>
+        </div>
+    </nav>
+
+    <!-- Hero 區塊 -->
+    <section class="hero-pattern py-12 md:py-20 overflow-hidden relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Hero 文字 -->
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-milktea-100 border border-milktea-200 px-4 py-1.5 rounded-full text-xs md:text-sm text-milktea-600 font-medium">
+                        <span>✨ 專屬小型犬的溫馨洗護角落</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-milktea-600 leading-tight">
+                        下班後，把最愛的寶貝<br>
+                        安心交給<span class="text-milktea-500 underline decoration-milktea-300 decoration-wavy underline-offset-8">明月萌</span>吧！
+                    </h1>
+                    <p class="text-base sm:text-lg text-warmgrey leading-relaxed">
+                        嗨！上班辛苦囉～是不是常常忙了一整天，回家看到毛孩好想讓牠舒舒服服香噴噴？<br>
+                        明月萌專為貴賓、比熊、博美、瑪爾等小型犬打造，一對一溫和對待，就像親自抱在懷裡寵愛一樣。
+                    </p>
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <a href="#booking" class="w-full sm:w-auto bg-milktea-500 hover:bg-milktea-600 text-white text-center px-8 py-3.5 rounded-full font-medium text-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-regular fa-calendar-check"></i>
+                            <span>幫毛孩預約 SPA</span>
+                        </a>
+                        <a href="#services" class="w-full sm:w-auto bg-white border border-milktea-300 text-milktea-600 hover:bg-milktea-50 text-center px-6 py-3.5 rounded-full font-medium transition-all">
+                            看看服務項目
+                        </a>
+                    </div>
+                    <!-- 快速特點標籤 -->
+                    <div class="pt-4 flex flex-wrap justify-center md:justify-start gap-4 text-xs sm:text-sm text-milktea-600">
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-milktea-400 mr-1.5"></i> 一對一預約制</span>
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-milktea-400 mr-1.5"></i> 彈性接送時間</span>
+                        <span class="flex items-center"><i class="fa-solid fa-circle-check text-milktea-400 mr-1.5"></i> 不催促零壓力</span>
+                    </div>
+                </div>
+
+                <!-- Hero 主圖 -->
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden card-shadow bg-milktea-100 p-3 border-4 border-white transform rotate-1">
+                        <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=800" 
+                             alt="可愛萌貓" 
+                             class="w-full h-full object-cover rounded-2xl"
+                             onerror="this.src='https://placehold.co/800x800/E1EFF9/3B89C3?text=明月萌可愛貓咪'">
+                    </div>
+                    <!-- 裝飾小卡 -->
+                    <div class="absolute -bottom-4 -left-2 bg-white/95 backdrop-blur-sm p-4 rounded-2xl card-shadow border border-milktea-100 hidden sm:flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-softpink flex items-center justify-center text-pink-500">
+                            <i class="fa-solid fa-heart text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-milktea-600">上班族爸媽好評推推</p>
+                            <p class="text-[11px] text-warmgrey">「回家看到毛孩變超香超鬆軟散發奶香味！」</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 (About Us) -->
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-12">
+                <span class="text-milktea-500 font-medium text-sm tracking-wider uppercase">ABOUT US</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-milktea-600">歡迎來到明月萌，像來到朋友家一樣自在</h2>
+                <div class="w-12 h-1 bg-milktea-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-5">
+                    <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600" 
+                         alt="明月萌溫馨環境" 
+                         class="rounded-3xl card-shadow w-full h-80 object-cover border-2 border-milktea-100"
+                         onerror="this.src='https://placehold.co/600x600/E8D8C3/8A6239?text=溫馨環境'">
+                </div>
+                <div class="md:col-span-7 space-y-4 text-warmgrey leading-relaxed">
+                    <h3 class="text-xl font-bold text-milktea-600">「因為理解上班的辛苦，所以更想幫你好好愛牠。」</h3>
+                    <p>
+                        嗨，我是「明月萌」的主理人！我自己也是個超愛小型犬的重度狗狗控～懂大家每天擠捷運、打電腦、開會忙得不可開交，回家只想抱著毛孩好好吸一口的感覺！
+                    </p>
+                    <p>
+                        明月萌不是那種緊繃、吵雜的大型美容院。在這裡，我們一次只接待少數孩子，給小型犬最安靜、放鬆的環境。不管是紅貴賓、比熊、博美、吉娃娃還是瑪爾濟斯，我們都會像照顧自家寶貝一樣，耐心溫柔地跟牠們聊天、撫摸，讓洗澡和剪毛不再是壓力，而是一場開心的 SPA 約會！
+                    </p>
+                    <div class="pt-2 grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-cream p-4 rounded-2xl border border-milktea-100">
+                            <span class="block text-2xl font-bold text-milktea-500">100%</span>
+                            <span class="text-xs text-warmgrey">專注小型犬精細美容</span>
+                        </div>
+                        <div class="bg-cream p-4 rounded-2xl border border-milktea-100">
+                            <span class="block text-2xl font-bold text-milktea-500">1 on 1</span>
+                            <span class="text-xs text-warmgrey">一對一耐心溫和照顧</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服務項目 (Services) -->
+    <section id="services" class="py-16 md:py-24 bg-cream">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-milktea-500 font-medium text-sm tracking-wider uppercase">OUR SERVICES</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-milktea-600">專為小型犬量身打造的極致奢華洗護</h2>
+                <p class="text-warmgrey text-sm sm:text-base">貴賓圓圓頭、比熊棉花糖、博美球球造型？交給我準沒錯！</p>
+                <div class="w-12 h-1 bg-milktea-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- 卡片 1 -->
+                <div class="bg-white rounded-3xl p-6 border border-milktea-100 card-shadow card-shadow-hover transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-milktea-100 rounded-2xl flex items-center justify-center text-milktea-500 text-2xl mb-6">
+                            <i class="fa-solid fa-soap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-milktea-600 mb-2">日常輕盈基礎洗護</h3>
+                        <p class="text-xs text-milktea-400 font-medium mb-4">適合每1-2週定期保養的乖寶貝</p>
+                        <ul class="space-y-2 text-sm text-warmgrey mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 溫和植萃洗髮精雙層清潔</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 清耳垢、修剪腳底毛與腹毛</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 溫柔剪指甲、修圓腳掌毛</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 擠肛門腺與手工溫風吹乾</li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-cream flex justify-between items-center">
+                        <span class="text-xs text-warmgrey">約 1 - 1.5 小時</span>
+                        <span class="text-lg font-bold text-milktea-600">NT$ 600 <span class="text-xs font-normal">起</span></span>
+                    </div>
+                </div>
+
+                <!-- 卡片 2 (推薦) -->
+                <div class="bg-white rounded-3xl p-6 border-2 border-milktea-300 card-shadow card-shadow-hover transition-all flex flex-col justify-between relative transform md:-translate-y-2">
+                    <div class="absolute -top-3 right-6 bg-milktea-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        熱門首選 ❤️
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 bg-milktea-200 rounded-2xl flex items-center justify-center text-milktea-600 text-2xl mb-6">
+                            <i class="fa-solid fa-scissors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-milktea-600 mb-2">精細手工造型剪毛</h3>
+                        <p class="text-xs text-milktea-400 font-medium mb-4">含基礎洗護 + 獨家萌萌精細修剪</p>
+                        <ul class="space-y-2 text-sm text-warmgrey mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 包含「日常基礎洗護」全套</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 臉部線條修飾（圓頭/泰迪熊頭）</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 依照犬種體型客製化全身造型</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 贈送萌萌完成照一張 📷</li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-cream flex justify-between items-center">
+                        <span class="text-xs text-warmgrey">約 2.5 - 3 小時</span>
+                        <span class="text-lg font-bold text-milktea-600">NT$ 1,200 <span class="text-xs font-normal">起</span></span>
+                    </div>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="bg-white rounded-3xl p-6 border border-milktea-100 card-shadow card-shadow-hover transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-milktea-100 rounded-2xl flex items-center justify-center text-milktea-500 text-2xl mb-6">
+                            <i class="fa-solid fa-hot-tub-person"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-milktea-600 mb-2">舒壓微泡泥SPA護理</h3>
+                        <p class="text-xs text-milktea-400 font-medium mb-4">給敏感肌與需要紓壓毛孩的頂級享受</p>
+                        <ul class="space-y-2 text-sm text-warmgrey mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 碳酸微氣泡深層洗淨毛孔</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 日本草本深層保濕泥泡澡</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 肌肉放鬆輕柔按壓撫摩</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-milktea-400 mr-2 text-xs"></i> 舒緩皮屑與改善體味問題</li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-cream flex justify-between items-center">
+                        <span class="text-xs text-warmgrey">洗護再加購</span>
+                        <span class="text-lg font-bold text-milktea-600">+ NT$ 350 <span class="text-xs font-normal">起</span></span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-warmgrey mt-8">* 實際收費依毛孩體型、毛況及現場互動狀況微調，歡迎先傳照片私訊詢問喔！</p>
+        </div>
+    </section>
+
+    <!-- 上班族貼心服務 (Why Us) -->
+    <section id="why-us" class="py-16 md:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-milktea-500 font-medium text-sm tracking-wider uppercase">FOR BUSY PET PARENTS</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-milktea-600">懂上班族的忙！明月萌的貼心小對策</h2>
+                <p class="text-warmgrey text-sm sm:text-base">不用趕下班、不用擔心毛孩害怕，安心交給我們吧！</p>
+                <div class="w-12 h-1 bg-milktea-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-cream p-6 rounded-3xl border border-milktea-100 text-center space-y-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-milktea-500 text-xl mx-auto shadow-sm">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-milktea-600">彈性預約與接送</h3>
+                    <p class="text-xs text-warmgrey leading-relaxed">上班前送來、下班後再抱回家！中間提供舒適放鬆小休息區，不收額外住宿費。</p>
+                </div>
+
+                <div class="bg-cream p-6 rounded-3xl border border-milktea-100 text-center space-y-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-milktea-500 text-xl mx-auto shadow-sm">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h3 class="font-bold text-milktea-600">過程回報超安心</h3>
+                    <p class="text-xs text-warmgrey leading-relaxed">美容過程中會傳照片/短影音給爸媽，你在辦公室也能看到毛孩萌萌洗澡的樣子！</p>
+                </div>
+
+                <div class="bg-cream p-6 rounded-3xl border border-milktea-100 text-center space-y-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-milktea-500 text-xl mx-auto shadow-sm">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="font-bold text-milktea-600">零壓力零不適</h3>
+                    <p class="text-xs text-warmgrey leading-relaxed">絕不強迫、不催促！遇到緊張的狗狗會給予充分時間適應，陪伴牠建立信賴感。</p>
+                </div>
+
+                <div class="bg-cream p-6 rounded-3xl border border-milktea-100 text-center space-y-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-milktea-500 text-xl mx-auto shadow-sm">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <h3 class="font-bold text-milktea-600">嚴選天然無毒洗劑</h3>
+                    <p class="text-xs text-warmgrey leading-relaxed">全店使用低敏草本配方，溫和不傷皮膚，讓毛孩洗完散發自然舒服的奶香。</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 顧客好評與毛孩寫真 (Gallery / Reviews) -->
+    <section id="reviews" class="py-16 md:py-24 bg-cream">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-milktea-500 font-medium text-sm tracking-wider uppercase">HAPPY PUPPIES</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-milktea-600">看牠們洗完有多開心！萌萌寫真區</h2>
+                <p class="text-warmgrey text-sm sm:text-base">聽聽其他上班族爸媽怎麼說 ❤️</p>
+                <div class="w-12 h-1 bg-milktea-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <!-- 卡片 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-shadow p-5 space-y-4">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=600" 
+                         alt="貴賓狗波波" 
+                         class="w-full h-48 object-cover rounded-2xl"
+                         onerror="this.src='https://placehold.co/600x400/E8D8C3/8A6239?text=紅貴賓波波'">
+                    <div class="space-y-2">
+                        <div class="flex text-amber-400 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-warmgrey italic">「平常上班超忙，下班去接波波的時候看到牠圓滾滾又香噴噴，當天的壓力都消失了！剪得超級細緻！」</p>
+                        <div class="pt-2 border-t border-cream flex justify-between items-center text-xs">
+                            <span class="font-bold text-milktea-600">波波媽 (行銷企劃)</span>
+                            <span class="text-milktea-400">貴賓狗 / 3歲</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-shadow p-5 space-y-4">
+                    <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=600" 
+                         alt="比熊棉花糖" 
+                         class="w-full h-48 object-cover rounded-2xl"
+                         onerror="this.src='https://placehold.co/600x400/E8D8C3/8A6239?text=比熊麻糬'">
+                    <div class="space-y-2">
+                        <div class="flex text-amber-400 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-warmgrey italic">「麻糬以前去別家美容都很緊張，但在明月萌這裡美容師超溫柔，還傳牠洗澡的照片給我，真的超安心！」</p>
+                        <div class="pt-2 border-t border-cream flex justify-between items-center text-xs">
+                            <span class="font-bold text-milktea-600">Chen (軟體工程師)</span>
+                            <span class="text-milktea-400">比熊犬 / 2歲</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-shadow p-5 space-y-4">
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600" 
+                         alt="博美狗牛奶" 
+                         class="w-full h-48 object-cover rounded-2xl"
+                         onerror="this.src='https://placehold.co/600x400/E8D8C3/8A6239?text=博美牛奶'">
+                    <div class="space-y-2">
+                        <div class="flex text-amber-400 text-sm space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-warmgrey italic">「加了微泡泥 SPA 之後，牛奶的皮膚問題改善很多！抱起來口感超好（笑），奶茶色工作室質感真的棒！」</p>
+                        <div class="pt-2 border-t border-cream flex justify-between items-center text-xs">
+                            <span class="font-bold text-milktea-600">林小姐 (公務員)</span>
+                            <span class="text-milktea-400">博美犬 / 4歲</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 線上預約 / 聯絡我們 (Booking & Contact) -->
+    <section id="booking" class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-cream rounded-3xl card-shadow border-2 border-milktea-200 p-6 sm:p-10 relative overflow-hidden">
+                
+                <div class="text-center max-w-xl mx-auto space-y-3 mb-10">
+                    <span class="text-milktea-500 font-medium text-sm tracking-wider uppercase">ONLINE BOOKING</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-milktea-600">給毛孩預約一次放鬆之旅吧！</h2>
+                    <p class="text-warmgrey text-xs sm:text-sm">填寫下方簡單資料，我們會在第一時間與您聯繫確認時間喔～</p>
+                </div>
+
+                <!-- 預約表單 -->
+                <form id="bookingForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        
+                        <!-- 爸媽姓名 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">家長稱呼 *</label>
+                            <input type="text" required placeholder="例如：王小姐 / 陳先生" class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm">
+                        </div>
+
+                        <!-- 聯絡電話 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">聯絡電話 *</label>
+                            <input type="tel" required placeholder="0912-345-678" class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm">
+                        </div>
+
+                        <!-- 毛孩名字與品種 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">毛孩名字與犬種 *</label>
+                            <input type="text" required placeholder="例如：奶茶 (紅貴賓)" class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm">
+                        </div>
+
+                        <!-- 預約服務項目 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">想預約的服務 *</label>
+                            <select required class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm text-warmgrey">
+                                <option value="">請選擇預約項目</option>
+                                <option value="1">日常輕盈基礎洗護</option>
+                                <option value="2">精細手工造型剪毛 (含洗護)</option>
+                                <option value="3">洗護 + 舒壓微泡泥SPA</option>
+                                <option value="4">還不確定，想私訊諮詢</option>
+                            </select>
+                        </div>
+
+                        <!-- 希望預約日期 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">希望預約日期 *</label>
+                            <input type="date" required class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm text-warmgrey">
+                        </div>
+
+                        <!-- 希望預約時段 -->
+                        <div>
+                            <label class="block text-sm font-medium text-milktea-600 mb-2">偏好時段 *</label>
+                            <select required class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm text-warmgrey">
+                                <option value="">請選擇偏好時間</option>
+                                <option value="morning">上午時段 (10:00 - 12:00)</option>
+                                <option value="afternoon">下午時段 (13:00 - 17:00)</option>
+                                <option value="evening">下班時段 (18:00 - 20:00)</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- 備註說明 -->
+                    <div>
+                        <label class="block text-sm font-medium text-milktea-600 mb-2">備註（毛孩個性、特殊狀況或注意事項）</label>
+                        <textarea rows="3" placeholder="例如：比較害羞、耳朵敏感、或是想剪圓圓頭頭～" class="w-full px-4 py-3 rounded-2xl bg-white border border-milktea-200 focus:outline-none focus:ring-2 focus:ring-milktea-400 text-sm"></textarea>
+                    </div>
+
+                    <!-- 送出按鈕 -->
+                    <div class="text-center pt-2">
+                        <button type="submit" class="w-full sm:w-auto bg-milktea-500 hover:bg-milktea-600 text-white font-medium px-10 py-3.5 rounded-full text-base shadow-md hover:shadow-lg transition-all">
+                            送出預約申請 🐾
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 快速通訊連繫方式 -->
+                <div class="mt-10 pt-8 border-t border-milktea-200/80 grid sm:grid-cols-3 gap-4 text-center text-xs sm:text-sm text-warmgrey">
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-line text-green-500 text-xl"></i>
+                        <span>LINE官方：@moon_pet</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-phone text-milktea-500 text-lg"></i>
+                        <span>專線：0912-345-678</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-location-dot text-milktea-500 text-lg"></i>
+                        <span>工作室：台北市溫馨小巷88號</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-milktea-600 text-cream py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
+                
+                <!-- 品牌資訊 -->
+                <div>
+                    <div class="flex items-center justify-center md:justify-start space-x-2 mb-2">
+                        <i class="fa-solid fa-paw text-milktea-300 text-xl"></i>
+                        <span class="font-rounded text-2xl font-bold tracking-wider">明月萌</span>
+                    </div>
+                    <p class="text-xs text-milktea-200 max-w-sm">
+                        專屬小型犬的溫馨洗護角落．陪伴毛孩與上班族爸媽的暖心時光。
+                    </p>
+                </div>
+
+                <!-- 營業時間與社群 -->
+                <div class="text-xs text-milktea-200 space-y-2">
+                    <p><i class="fa-regular fa-clock mr-1"></i> 營業時間：週二至週日 10:00 - 20:00（週一公休）</p>
+                    <div class="flex justify-center md:justify-end space-x-4 text-lg text-cream pt-1">
+                        <a href="#" class="hover:text-milktea-300 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-milktea-300 transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-milktea-300 transition-colors" aria-label="LINE"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 版權與製作人標示 -->
+            <div class="mt-10 pt-6 border-t border-milktea-500/60 text-center text-xs text-milktea-200 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+                <p>© 2026 明月萌寵物工作室. All Rights Reserved.</p>
+                <div class="bg-milktea-500/50 px-4 py-1.5 rounded-full border border-milktea-400/40 text-cream font-medium">
+                    製作：淇淇
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 自訂彈窗 (Modal - 替代 alert) -->
+    <div id="successModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center space-y-5 card-shadow transform transition-all scale-95 opacity-0" id="modalCard">
+            <div class="w-16 h-16 bg-milktea-100 text-milktea-500 rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-milktea-600">收到您的預約囉！</h3>
+            <p class="text-sm text-warmgrey leading-relaxed">
+                謝謝預約！明月萌會盡快與您聯繫陪伴寶貝喔～<br>
+                如果有任何急事，也歡迎直接加 LINE私訊我們！ 🐾
+            </p>
+            <button id="closeModalBtn" class="bg-milktea-500 hover:bg-milktea-600 text-white font-medium px-8 py-2.5 rounded-full text-sm transition-all w-full">
+                太棒了，我知道了！
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // 手機版選單切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 預約表單提交處理與彈窗互動
+        const bookingForm = document.getElementById('bookingForm');
+        const successModal = document.getElementById('successModal');
+        const modalCard = document.getElementById('modalCard');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 阻擋預設提交行為
+            
+            // 顯示 Modal 視窗
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            // 清空表單
+            bookingForm.reset();
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                successModal.classList.add('hidden');
+            }, 200);
+        });
+
+        // 點擊 Modal 背景關閉
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                closeModalBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
